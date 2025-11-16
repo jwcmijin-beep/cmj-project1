@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>물발자국 계산기</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      padding: 30px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #0077cc;
+    }
+    .item {
+      margin-bottom: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 80px;
+      padding: 5px;
+      margin-left: 10px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🌊 물발자국 계산기</h2>
+
+  <div class="item"><label>마시는 물 한 잔 (0.2L = 0.2L):</label><input type="number" id="water" value="0" min="0"></div>
+  <div class="item"><label>소고기 (1kg = 15414L):</label><input type="number" id="beef" value="0" min="0"></div>
+  <div class="item"><label>돼지고기 (1kg = 5988L):</label><input type="number" id="pork" value="0" min="0"></div>
+  <div class="item"><label>닭고기 (1kg = 4325L):</label><input type="number" id="chicken" value="0" min="0"></div>
+  <div class="item"><label>쌀 (1kg = 900L):</label><input type="number" id="rice" value="0" min="0"></div>
+  <div class="item"><label>감자 (1kg = 300L):</label><input type="number" id="potato" value="0" min="0"></div>
+  <div class="item"><label>사과 (1kg = 200L):</label><input type="number" id="apple" value="0" min="0"></div>
+  <div class="item"><label>초콜릿 (100g = 1710L):</label><input type="number" id="chocolate" value="0" min="0"></div>
+  <div class="item"><label>커피 (1잔 = 130L):</label><input type="number" id="coffee" value="0" min="0"></div>
+  <div class="item"><label>우유 (1컵 = 255L):</label><input type="number" id="milk" value="0" min="0"></div>
+  <div class="item"><label>햄버거 (1개 = 2400L):</label><input type="number" id="burger" value="0" min="0"></div>
+  <div class="item"><label>청바지 (1벌 = 12000L):</label><input type="number" id="jeans" value="0" min="0"></div>
+  <div class="item"><label>샤워(1분 = 15L):</label><input type="number" id="shower" value="0" min="0"></div>
+  <div class="item"><label>피자 한 판(1kg = 1259L):</label><input type="number" id="pizza" value="0" min="0"></div>
+
+  <button onclick="calculate()">총 물발자국 계산하기</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculate() {
+      const values = {
+        water: 0.2,  // per cup
+        beef: 15414,
+        pork: 5988,
+        chicken: 4325,
+        rice: 900,
+        potato: 300,
+        apple: 200,
+        chocolate: 1710,     // per 100g
+        coffee: 130,     // per cup
+        milk: 255,       // per cup
+        burger: 2400,     // per burger
+        jeans: 12000,     // per pair
+        shower: 15,     // per pair
+        pizza: 1259,     // per pizza
+       };
+
+      let total = 0;
+      for (let item in values) {
+        const quantity = parseFloat(document.getElementById(item).value) || 0;
+        total += values[item] * quantity;
+      }
+
+      const resultBox = document.getElementById("result");
+      resultBox.innerText = `총 물발자국은 약 ${total.toLocaleString()} 리터입니다.`;
+
+      // 색상 표시
+      if (total < 2000) {
+        resultBox.style.backgroundColor = "#d4f4dd"; // 연녹색
+        resultBox.style.color = "#006400";
+      } else if (total < 10000) {
+        resultBox.style.backgroundColor = "#fff4cc"; // 연노랑
+        resultBox.style.color = "#8b8000";
+      } else {
+        resultBox.style.backgroundColor = "#ffd6d6"; // 연분홍
+        resultBox.style.color = "#a00000";
+      }
+    }
+  </script>
+</body>
+</html>
